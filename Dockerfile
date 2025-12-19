@@ -3,7 +3,7 @@ FROM mfdz/opentripplanner:$OTP_VERSION AS otp
 
 # defined empty, so we can access the arg as env later again
 ARG OTP_VERSION
-ENV ROUTER_NAME=vsh
+ENV ROUTER_NAME=amman
 
 RUN apk add --update zip && \
     rm -rf /var/cache/apk/*
@@ -12,8 +12,8 @@ RUN mkdir -p /opt/opentripplanner/build/$ROUTER_NAME/
 
 # add build data
 # NOTE: we're trying to use dockers caching here. add items in order of least to most frequent changes
-ADD https://rgw1.netways.de/swift/v1/AUTH_66c3085bb69a42ed8991c90e5c1f453e/digitransit/osm/tuebingen-schwaben-latest.osm.pbf /opt/opentripplanner/build/$ROUTER_NAME/
-ADD https://gtfs.mfdz.de/ulm.merged.gtfs.zip /opt/opentripplanner/build/$ROUTER_NAME/
+ADD https://www.dropbox.com/scl/fi/ram2pyr2uefvcl88bduvu/jordan-251206.osm.pbf?rlkey=99jvmwvefeegt373bo4h2h6hu&st=dmemui0y&dl=1 /opt/opentripplanner/build/$ROUTER_NAME/
+ADD https://www.dropbox.com/scl/fi/5m226l7hmn3tw8rbzx1u5/gtfs_20251219_081802.zip?rlkey=hb5vi5f75jemyyblh672kmavl&st=d76b1erk&dl=1 /opt/opentripplanner/build/$ROUTER_NAME/
 ADD router-config.json /opt/opentripplanner/build/$ROUTER_NAME/
 ADD build-config.json /opt/opentripplanner/build/$ROUTER_NAME/
 
